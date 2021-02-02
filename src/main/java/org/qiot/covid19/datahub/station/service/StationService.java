@@ -1,6 +1,8 @@
 package org.qiot.covid19.datahub.station.service;
 
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import org.qiot.covid19.datahub.station.client.LocalizationServiceClient;
 import org.qiot.covid19.datahub.station.domain.dto.StationDTO;
 import org.qiot.covid19.datahub.station.domain.pojo.Station;
 import org.qiot.covid19.datahub.station.persistence.StationRepository;
+import org.qiot.covid19.datahub.station.util.converter.StationConverter;
 import org.slf4j.Logger;
 
 @ApplicationScoped
@@ -37,6 +40,9 @@ public class StationService {
     @Inject
     @RestClient
     LocalizationServiceClient serviceClient;
+
+    @Inject
+    StationConverter converter;
 
     public String add(String serial, String name, double longitude,
             double latitude) {
@@ -64,10 +70,11 @@ public class StationService {
             }
         } catch (Exception e) {
             LOGGER.debug("An error occurred retrieving city and country", e);
-            LOGGER.warn(
+            LOGGER.error(
                     "An error occurred retrieving city and country for the following coordinates: "
-                            + "[longitude={},latitude={}] :\n{}",
-                    longitude, latitude, e.getCause());
+                            + "[longitude=" + longitude
+                            + ",latitude="+latitude+"] :\n{}",
+                    e);
         }
 
         repository.persist(station);
@@ -76,15 +83,15 @@ public class StationService {
 
     public StationDTO getById(String id) {
         Station station = repository.findById(id);
-        StationDTO dto = new StationDTO();
-        dto.id = station.id.toString();
-        dto.serial = station.serial;
-        dto.name = station.name;
-        dto.longitude = station.geometry.getX();
-        dto.latitude = station.geometry.getY();
-        dto.city = station.city;
-        dto.country = station.country;
-        station = null;
-        return dto;
+        return converter.convert(station);
+    }
+
+    public List<StationDTO> getAllStations() {
+        List<StationDTO> stationDTOs = null;
+        List<Station> stations = repository.findAllStations();
+        stationDTOs = new ArrayList<>(stations.size());
+        for (Station station : stations)
+            stationDTOs.add(converter.convert(station));
+        return stationDTOs;
     }
 }

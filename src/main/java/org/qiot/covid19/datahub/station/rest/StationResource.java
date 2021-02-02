@@ -1,5 +1,7 @@
 package org.qiot.covid19.datahub.station.rest;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
@@ -34,6 +36,13 @@ public class StationResource {
     @GET
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
+    public List<StationDTO> getAll() {
+        return service.getAllStations();
+    }
+
+    @GET
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public StationDTO getById(@QueryParam("id") @NotNull String id) {
         return service.getById(id);
     }
@@ -44,6 +53,7 @@ public class StationResource {
      */
     @Transactional
     @PUT
+    @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
     public String add(@QueryParam("serial") @NotNull String serial,
             @QueryParam("name") @NotNull String name,

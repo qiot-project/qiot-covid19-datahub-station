@@ -4,22 +4,21 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.geolatte.geom.G2D;
 import org.hibernate.annotations.GenericGenerator;
-import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Entity
+@Cacheable
 @Table(name = "station")
 @RegisterForReflection
 public class Station extends PanacheEntityBase {

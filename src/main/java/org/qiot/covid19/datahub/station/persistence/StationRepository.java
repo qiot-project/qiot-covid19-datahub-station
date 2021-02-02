@@ -1,5 +1,7 @@
 package org.qiot.covid19.datahub.station.persistence;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -8,6 +10,7 @@ import javax.inject.Inject;
 import org.qiot.covid19.datahub.station.domain.pojo.Station;
 import org.slf4j.Logger;
 
+import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
 /**
@@ -30,6 +33,10 @@ public class StationRepository implements PanacheRepositoryBase<Station, UUID> {
         if (ms != null)
             LOGGER.debug("Found StationDTO {}", ms);
         return ms;
+    }
+
+    public List<Station> findAllStations() {
+        return findAll().list();
     }
 
 }
