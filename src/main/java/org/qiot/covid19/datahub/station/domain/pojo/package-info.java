@@ -1,1 +1,0 @@
-package org.qiot.covid19.datahub.station.domain.pojo;

@@ -14,10 +14,10 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <quarkus-plugin.version>1.11.1.Final</quarkus-plugin.version>
+        <quarkus-plugin.version>1.11.2.Final</quarkus-plugin.version>
         <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-        <quarkus.platform.version>1.11.1.Final</quarkus.platform.version>
+        <quarkus.platform.version>1.11.2.Final</quarkus.platform.version>
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
     </properties>
     <dependencyManagement>
@@ -40,14 +40,14 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-hibernate-validator</artifactId>
         </dependency>
-<!--         <dependency> -->
-<!--             <groupId>io.quarkus</groupId> -->
-<!--             <artifactId>quarkus-smallrye-openapi</artifactId> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>io.quarkus</groupId> -->
-<!--             <artifactId>quarkus-swagger-ui</artifactId> -->
-<!--         </dependency> -->
+        <!-- <dependency> -->
+        <!-- <groupId>io.quarkus</groupId> -->
+        <!-- <artifactId>quarkus-smallrye-openapi</artifactId> -->
+        <!-- </dependency> -->
+        <!-- <dependency> -->
+        <!-- <groupId>io.quarkus</groupId> -->
+        <!-- <artifactId>quarkus-swagger-ui</artifactId> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-client-jsonb</artifactId>
@@ -68,15 +68,15 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-mysql</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-liquibase</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-spatial</artifactId>
-            <version>5.4.27.Final</version>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>io.quarkus</groupId> -->
+<!--             <artifactId>quarkus-liquibase</artifactId> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>org.hibernate</groupId> -->
+<!--             <artifactId>hibernate-spatial</artifactId> -->
+<!--             <version>5.4.27.SP1</version> -->
+<!--         </dependency> -->
         <!-- <dependency> -->
         <!-- <groupId>io.quarkus</groupId> -->
         <!-- <artifactId>quarkus-hibernate-reactive</artifactId> -->
@@ -144,6 +144,19 @@
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.jboss.jandex</groupId>
+                        <artifactId>jandex-maven-plugin</artifactId>
+                        <version>1.0.7</version>
+                        <executions>
+                            <execution>
+                                <id>make-index</id>
+                                <goals>
+                                    <goal>jandex</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>${surefire-plugin.version}</version>
                         <executions>
@@ -166,6 +179,7 @@
             </build>
             <properties>
                 <quarkus.package.type>native</quarkus.package.type>
+<!--                 <quarkus.native.additional-build-args>-H:ReflectionConfigurationFiles=reflection-config.json</quarkus.native.additional-build-args> -->
             </properties>
         </profile>
     </profiles>
