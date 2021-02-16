@@ -68,15 +68,21 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-mysql</artifactId>
         </dependency>
-<!--         <dependency> -->
-<!--             <groupId>io.quarkus</groupId> -->
-<!--             <artifactId>quarkus-liquibase</artifactId> -->
-<!--         </dependency> -->
-<!--         <dependency> -->
-<!--             <groupId>org.hibernate</groupId> -->
-<!--             <artifactId>hibernate-spatial</artifactId> -->
-<!--             <version>5.4.27.SP1</version> -->
-<!--         </dependency> -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-liquibase</artifactId>
+        </dependency>
+        <!-- https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-23.html#connector-j-8-0-23-bug -->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+        <!-- <dependency> -->
+        <!-- <groupId>org.hibernate</groupId> -->
+        <!-- <artifactId>hibernate-spatial</artifactId> -->
+        <!-- <version>5.4.27.SP1</version> -->
+        <!-- </dependency> -->
         <!-- <dependency> -->
         <!-- <groupId>io.quarkus</groupId> -->
         <!-- <artifactId>quarkus-hibernate-reactive</artifactId> -->
@@ -179,7 +185,7 @@
             </build>
             <properties>
                 <quarkus.package.type>native</quarkus.package.type>
-<!--                 <quarkus.native.additional-build-args>-H:ReflectionConfigurationFiles=reflection-config.json</quarkus.native.additional-build-args> -->
+                <!-- <quarkus.native.additional-build-args>-H:ReflectionConfigurationFiles=reflection-config.json</quarkus.native.additional-build-args> -->
             </properties>
         </profile>
     </profiles>

@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
+import io.qiot.covid19.datahub.station.domain.dto.Location;
+
 /**
  * @author abattagl
  *
@@ -25,7 +27,7 @@ public interface LocalizationServiceClient {
     @Path("/location")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    String getLocation(@QueryParam("longitude") double longitude,
+    Location getLocation(@QueryParam("longitude") double longitude,
             @QueryParam("latitude") double latitude)
             throws Exception;
 

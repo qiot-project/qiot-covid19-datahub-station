@@ -14,10 +14,12 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.slf4j.Logger;
 
 import io.qiot.covid19.datahub.station.client.LocalizationServiceClient;
+import io.qiot.covid19.datahub.station.domain.dto.Location;
 import io.qiot.covid19.datahub.station.domain.dto.StationDTO;
 import io.qiot.covid19.datahub.station.domain.pojo.Station;
 import io.qiot.covid19.datahub.station.persistence.StationRepository;
 import io.qiot.covid19.datahub.station.util.converter.StationConverter;
+import liquibase.pro.packaged.lo;
 
 @ApplicationScoped
 public class StationService {
@@ -30,8 +32,8 @@ public class StationService {
     @Inject
     Logger LOGGER;
 
-//    @Inject
-//    GeometryFactory gfactory;
+    // @Inject
+    // GeometryFactory gfactory;
 
     @Inject
     StationRepository repository;
@@ -48,33 +50,37 @@ public class StationService {
         Station station = new Station();
         station.serial = serial;
         station.name = name;
-//        station.geometry = gfactory
-//                .createPoint(new Coordinate(longitude, latitude));
-        station.longitude=longitude;
-        station.latitude=latitude;
+        // station.geometry = gfactory
+        // .createPoint(new Coordinate(longitude, latitude));
+        station.longitude = longitude;
+        station.latitude = latitude;
 
         String jsonResult;
         try {
-            jsonResult = serviceClient.getLocation(longitude, latitude);
-            LOGGER.debug(jsonResult);
-            try (StringReader sr = new StringReader(jsonResult);
-                    JsonReader reader = Json.createReader(sr)) {
-                JsonObject jsonObject = reader.readObject();
-
-                if (jsonObject.containsKey(CITY))
-                    station.city = jsonObject.getString(CITY);
-                if (jsonObject.containsKey(COUNTRY)) {
-                    station.country = jsonObject.getString(COUNTRY);
-                    station.countryCode = jsonObject.getString(COUNTRY_CODE)
-                            .toUpperCase();
-                }
-            }
+            // jsonResult = serviceClient.getLocation(longitude, latitude);
+            // LOGGER.debug(jsonResult);
+            // try (StringReader sr = new StringReader(jsonResult);
+            // JsonReader reader = Json.createReader(sr)) {
+            // JsonObject jsonObject = reader.readObject();
+            //
+            // if (jsonObject.containsKey(CITY))
+            // station.city = jsonObject.getString(CITY);
+            // if (jsonObject.containsKey(COUNTRY)) {
+            // station.country = jsonObject.getString(COUNTRY);
+            // station.countryCode = jsonObject.getString(COUNTRY_CODE)
+            // .toUpperCase();
+            // }
+            // }
+            Location location = serviceClient.getLocation(longitude, latitude);
+            station.city = location.city;
+            station.country = location.country;
+            station.countryCode = location.ccode;
         } catch (Exception e) {
             LOGGER.debug("An error occurred retrieving city and country", e);
             LOGGER.error(
                     "An error occurred retrieving city and country for the following coordinates: "
-                            + "[longitude=" + longitude
-                            + ",latitude="+latitude+"] :\n{}",
+                            + "[longitude=" + longitude + ",latitude="
+                            + latitude + "] :\n{}",
                     e);
         }
 
