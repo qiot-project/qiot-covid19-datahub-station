@@ -22,7 +22,7 @@ import io.qiot.covid19.datahub.station.service.StationService;
  * Validation through hibernate validator:
  * https://quarkus.io/guides/validation#rest-end-point-validation
  * 
- * @author abattagl
+ * @author andreabattaglia
  *
  */
 @Path("/station")

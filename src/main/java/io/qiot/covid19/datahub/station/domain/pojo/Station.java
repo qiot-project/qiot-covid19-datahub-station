@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -46,7 +47,8 @@ public class Station extends PanacheEntityBase {
     public String country;
     @Column(name = "country_code", nullable = true)
     public String countryCode;
-    @Column(name = "registered_on", columnDefinition = "TIMESTAMP")
+    @Column(name = "registered_on", nullable = false, columnDefinition = "TIMESTAMP")
+    @CreationTimestamp
     public Instant registeredOn;
 
     @Override

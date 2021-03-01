@@ -14,7 +14,7 @@ import io.quarkus.hibernate.orm.panache.PanacheQuery;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 
 /**
- * @author abattagl
+ * @author andreabattaglia
  *
  */
 @ApplicationScoped
