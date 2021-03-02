@@ -9,38 +9,24 @@
 
     <changeSet author="Domenico Briganti" id="1">
       <comment>Create station table</comment>
-      <!-- <sql>
-        CREATE TABLE `station` (
-          `id` binary(16) NOT NULL,
-          `serial` varchar(255) NOT NULL,
-          `name` varchar(255) NOT NULL,
-          `geometry` geometry NOT NULL /*!80003 SRID 4326 */,
-          `city` varchar(255) ,
-          `country` varchar(255) ,
-          `country_code` varchar(10) ,
-          `registered_on` timestamp NULL DEFAULT NULL,
-          PRIMARY KEY (`id`),
-          UNIQUE KEY `UK_n8mucdp0jk0ykhjyikkjifjnp` (`serial`),
-          SPATIAL KEY `coordinates_idx` (`geometry`),
-          KEY `location_idx` (`city`,`country_code`)
-        ) ENGINE=InnoDB;
-      </sql> -->
       <sql>
-        CREATE TABLE `station` (
-          `id` binary(16) NOT NULL,
-          `city` varchar(255) DEFAULT NULL,
-          `country` varchar(255) DEFAULT NULL,
-          `country_code` varchar(255) DEFAULT NULL,
-          `latitude` double NOT NULL,
-          `longitude` double NOT NULL,
-          `name` varchar(255) NOT NULL,
-          `registered_on` timestamp NULL DEFAULT NULL,
-          `serial` varchar(255) NOT NULL,
-          PRIMARY KEY (`id`),
-          UNIQUE KEY `UK_n8mucdp0jk0ykhjyikkjifjnp` (`serial`),
-          KEY `location_idx` (`country_code`,`city`),
-          KEY `voordinatex_idx` (`longitude`,`latitude`)
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        CREATE TABLE public.station
+        (
+            id uuid NOT NULL,
+            city character varying(255) COLLATE pg_catalog."default",
+            country character varying(255) COLLATE pg_catalog."default",
+            country_code character varying(255) COLLATE pg_catalog."default",
+            latitude double precision NOT NULL,
+            longitude double precision NOT NULL,
+            name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+            registered_on timestamp without time zone NOT NULL,
+            serial character varying(255) COLLATE pg_catalog."default" NOT NULL,
+            CONSTRAINT station_pkey PRIMARY KEY (id),
+            CONSTRAINT station_coordinates_idx UNIQUE (longitude, latitude),
+            CONSTRAINT station_location_idx UNIQUE (country_code, city),
+            CONSTRAINT uk_n8mucdp0jk0ykhjyikkjifjnp UNIQUE (serial)
+        )
+        TABLESPACE pg_default;
       </sql>
     </changeSet>
     
