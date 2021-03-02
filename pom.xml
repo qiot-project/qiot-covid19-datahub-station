@@ -68,25 +68,10 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
-        <!-- https://dev.mysql.com/doc/relnotes/connector-j/8.0/en/news-8-0-23.html#connector-j-8-0-23-bug -->
         <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-<!--             <version>4.3.1</version> -->
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-liquibase</artifactId>
         </dependency>
-        <!-- <dependency> -->
-        <!-- <groupId>org.hibernate</groupId> -->
-        <!-- <artifactId>hibernate-spatial</artifactId> -->
-        <!-- <version>5.4.27.SP1</version> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>io.quarkus</groupId> -->
-        <!-- <artifactId>quarkus-hibernate-reactive</artifactId> -->
-        <!-- </dependency> -->
-        <!-- <dependency> -->
-        <!-- <groupId>io.quarkus</groupId> -->
-        <!-- <artifactId>quarkus-reactive-mysql-client</artifactId> -->
-        <!-- </dependency> -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
@@ -145,19 +130,19 @@
             </activation>
             <build>
                 <plugins>
-                    <plugin>
-                        <groupId>org.jboss.jandex</groupId>
-                        <artifactId>jandex-maven-plugin</artifactId>
-                        <version>1.0.7</version>
-                        <executions>
-                            <execution>
-                                <id>make-index</id>
-                                <goals>
-                                    <goal>jandex</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<!--                     <plugin> -->
+<!--                         <groupId>org.jboss.jandex</groupId> -->
+<!--                         <artifactId>jandex-maven-plugin</artifactId> -->
+<!--                         <version>1.0.7</version> -->
+<!--                         <executions> -->
+<!--                             <execution> -->
+<!--                                 <id>make-index</id> -->
+<!--                                 <goals> -->
+<!--                                     <goal>jandex</goal> -->
+<!--                                 </goals> -->
+<!--                             </execution> -->
+<!--                         </executions> -->
+<!--                     </plugin> -->
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>${surefire-plugin.version}</version>
