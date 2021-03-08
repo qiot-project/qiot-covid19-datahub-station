@@ -1,14 +1,10 @@
 package io.qiot.covid19.datahub.station.service;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.slf4j.Logger;
@@ -19,7 +15,6 @@ import io.qiot.covid19.datahub.station.domain.dto.StationDTO;
 import io.qiot.covid19.datahub.station.domain.pojo.Station;
 import io.qiot.covid19.datahub.station.persistence.StationRepository;
 import io.qiot.covid19.datahub.station.util.converter.StationConverter;
-import liquibase.pro.packaged.lo;
 
 @ApplicationScoped
 public class StationService {
