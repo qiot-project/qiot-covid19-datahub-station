@@ -38,6 +38,7 @@ public class StationResource {
     @GET
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/all")
     public List<StationDTO> getAll() {
         return service.getAllStations();
     }
