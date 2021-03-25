@@ -50,7 +50,6 @@ public class StationService {
         station.longitude = longitude;
         station.latitude = latitude;
 
-        String jsonResult;
         try {
             // jsonResult = serviceClient.getLocation(longitude, latitude);
             // LOGGER.debug(jsonResult);
