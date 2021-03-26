@@ -7,7 +7,7 @@
     http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="Domenico Briganti" id="1">
+    <changeSet author="Andrea Battaglia" id="1">
       <comment>Create station table</comment>
       <sql>
         CREATE TABLE public.station
@@ -22,11 +22,26 @@
             registered_on timestamp without time zone NOT NULL,
             serial character varying(255) COLLATE pg_catalog."default" NOT NULL,
             CONSTRAINT station_pkey PRIMARY KEY (id),
-            CONSTRAINT station_coordinates_idx (longitude, latitude),
-            CONSTRAINT station_location_idx (country_code, city),
             CONSTRAINT uk_n8mucdp0jk0ykhjyikkjifjnp UNIQUE (serial)
         )
+        
         TABLESPACE pg_default;
+      </sql>
+      <sql>
+        ALTER TABLE public.station
+            OWNER to qiot;
+      </sql>
+      <sql>
+        CREATE INDEX station_coordinates_idx
+            ON public.station USING btree
+            (longitude ASC NULLS LAST, latitude ASC NULLS LAST)
+            TABLESPACE pg_default;
+      </sql>
+      <sql>
+        CREATE INDEX station_location_idx
+            ON public.station USING btree
+            (country_code COLLATE pg_catalog."default" ASC NULLS LAST, city COLLATE pg_catalog."default" ASC NULLS LAST)
+            TABLESPACE pg_default;
       </sql>
     </changeSet>
     
