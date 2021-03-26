@@ -23,8 +23,8 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 @Cacheable
 @Table(name = "station", indexes = {//
         @Index(name="station_serial_idx", columnList = "serial", unique = true),//
-        @Index(name="station_location_idx", columnList = "country_code, city", unique = true),//
-        @Index(name="station_coordinates_idx", columnList = "longitude, latitude", unique = true)//
+        @Index(name="station_location_idx", columnList = "country_code, city", unique = false),//
+        @Index(name="station_coordinates_idx", columnList = "longitude, latitude", unique = false)//
         })
 @RegisterForReflection
 public class Station extends PanacheEntityBase {

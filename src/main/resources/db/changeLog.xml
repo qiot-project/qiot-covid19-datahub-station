@@ -22,8 +22,8 @@
             registered_on timestamp without time zone NOT NULL,
             serial character varying(255) COLLATE pg_catalog."default" NOT NULL,
             CONSTRAINT station_pkey PRIMARY KEY (id),
-            CONSTRAINT station_coordinates_idx UNIQUE (longitude, latitude),
-            CONSTRAINT station_location_idx UNIQUE (country_code, city),
+            CONSTRAINT station_coordinates_idx (longitude, latitude),
+            CONSTRAINT station_location_idx (country_code, city),
             CONSTRAINT uk_n8mucdp0jk0ykhjyikkjifjnp UNIQUE (serial)
         )
         TABLESPACE pg_default;
