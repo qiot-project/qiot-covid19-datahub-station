@@ -7,7 +7,7 @@
     http://www.liquibase.org/xml/ns/dbchangelog
     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="Andrea Battaglia" id="1">
+    <changeSet author="station-service" id="1">
       <comment>Create station table</comment>
       <sql>
         CREATE TABLE public.station
